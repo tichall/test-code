@@ -1,5 +1,6 @@
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -33,7 +34,7 @@ public class StringTest {
 
     @Test
     @DisplayName("괄호 사이에 있는 문자열 반환 테스트")
-    void substring() {
+    void substring_ReturnsStringBetweenParentheses() {
         // given
         String input = "(1,2)";
         int beginIndex = input.indexOf("(") + 1;
@@ -44,5 +45,17 @@ public class StringTest {
 
         // then
         assertThat(result).isEqualTo("1,2");
+    }
+
+    @Test
+    @DisplayName("문자열 길이를 벗어나는 인덱스의 문자를 가져오려고 할 때 발생하는 예외 테스트")
+    void charAt_IndexOutOfBounds_ThrowsException() {
+        // given
+        String input = "abc";
+        int index = input.length() + 1;
+
+        // when, then
+        assertThatThrownBy(() -> input.charAt(index))
+                .isInstanceOf(StringIndexOutOfBoundsException.class);
     }
 }
