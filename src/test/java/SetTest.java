@@ -5,6 +5,8 @@ import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class SetTest {
     private Set<Integer> numbers;
@@ -26,5 +28,22 @@ public class SetTest {
 
         // then
         assertThat(result).isEqualTo(3);
+    }
+
+
+    /**
+     * 아래 테스트 메서드 개선하기
+     *
+     * void contains() {
+     * assertThat(numbers.contains(1)).isTrue();
+     * assertThat(numbers.contains(2)).isTrue();
+     * assertThat(numbers.contains(3)).isTrue();
+     * }
+     */
+    @DisplayName("Set에 특정 값이 존재하는지 확인하는 테스트")
+    @ParameterizedTest
+    @ValueSource(ints = {1, 2, 3})
+    void contains(int number) {
+        assertThat(numbers.contains(number)).isTrue();
     }
 }
