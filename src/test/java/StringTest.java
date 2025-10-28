@@ -30,4 +30,19 @@ public class StringTest {
         // then
         assertThat(result).containsExactly("1");
     }
+
+    @Test
+    @DisplayName("괄호 사이에 있는 문자열 반환 테스트")
+    void substring() {
+        // given
+        String input = "(1,2)";
+        int beginIndex = input.indexOf("(") + 1;
+        int lastIndex = input.indexOf(")");
+
+        // when
+        String result = input.substring(beginIndex, lastIndex);
+
+        // then
+        assertThat(result).isEqualTo("1,2");
+    }
 }
